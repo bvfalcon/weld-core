@@ -1,7 +1,7 @@
 Weld emptyBeansXmlModeAll Example
 ==================
 
-Deploying to WildFly
+Deploying to WildFly (Preview 31.0.1.Final)
 ---------------------
 
 Make sure you have assigned the absolute path of your installation to the
