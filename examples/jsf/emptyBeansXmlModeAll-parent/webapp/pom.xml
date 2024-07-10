@@ -34,4 +34,39 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>5.0.0.Final</version>
+				<executions>
+					<execution>
+						<id>configure-weld-start-wildfly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>start</goal>
+							<goal>execute-commands</goal>
+						</goals>
+						<configuration>
+							<commands>
+								<command>/subsystem=weld:write-attribute(name=legacy-empty-beans-xml-treatment, value=true)</command>
+
+								<command>/subsystem=logging/logger=org.jboss.weld:add()</command>
+								<command>/subsystem=logging/logger=org.jboss.weld:write-attribute(name=level, value=ALL)</command>
+								<command>/subsystem=logging/logger=org.jboss.weld:add-handler(name=CONSOLE)</command>
+							</commands>
+						</configuration>
+					</execution>
+					<execution>
+						<id>deploy-application</id>
+						<phase>package</phase>
+						<goals>
+							<goal>deploy-only</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
